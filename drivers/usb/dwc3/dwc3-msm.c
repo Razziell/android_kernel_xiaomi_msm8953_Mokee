@@ -54,7 +54,7 @@
 
 #define DWC3_IDEV_CHG_MAX 2000
 #define DWC3_IDEV_SDP_CHG_MAX 500
-#define DWC3_HVDCP_CHG_MAX 1800
+#define DWC3_HVDCP_CHG_MAX 2000
 
 /* AHB2PHY register offsets */
 #define PERIPH_SS_AHB2PHY_TOP_CFG 0x10
