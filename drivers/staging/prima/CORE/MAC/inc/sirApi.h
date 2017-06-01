@@ -766,7 +766,7 @@ typedef struct sSirChannelList
 
 typedef struct sSirDFSChannelList
 {
-    tANI_U32         timeStamp[SIR_MAX_24G_5G_CHANNEL_RANGE];
+    v_TIME_t         timeStamp[SIR_MAX_24G_5G_CHANNEL_RANGE];
 
 } tSirDFSChannelList, *tpSirDFSChannelList;
 
@@ -3766,6 +3766,12 @@ typedef struct sSirWlanSetRxpFilters
     tANI_U8 setMcstBcstFilter;
 }tSirWlanSetRxpFilters,*tpSirWlanSetRxpFilters;
 
+
+typedef struct sSirUpdateCfgIntParam
+{
+    tANI_U32 cfgId;
+}tSirUpdateCfgIntParam,*tpSirUpdateCfgIntParam;
+
 typedef struct
 {
   //FW mail box address
@@ -4616,6 +4622,9 @@ typedef struct sAniHandoffReq
     tANI_U8   sessionId;
     tANI_U8   bssid[WNI_CFG_BSSID_LEN];
     tANI_U8   channel;
+#ifndef QCA_WIFI_ISOC
+    tANI_U8   handoff_src;
+#endif
 } tAniHandoffReq, *tpAniHandoffReq;
 
 typedef struct sSirScanOffloadReq {
@@ -6099,32 +6108,6 @@ typedef struct {
    tANI_U32  value;
 } tModifyRoamParamsReqParams, * tpModifyRoamParamsReqParams;
 
-
-#ifdef WLAN_FEATURE_LFR_MBB
-
-/**
- * enum csr_roam_op_code - Operation to be done by the callback.
- * @SIR_ROAMING_DEREGISTER_STA: Deregister the old STA after roaming.
- * @SIR_STOP_ROAM_OFFLOAD_SCAN : sends RSO stop
- * @SIR_PREPARE_REASSOC_REQ: prepares reassoc request
- */
-enum csr_roam_op_code {
-    SIR_ROAMING_DEREGISTER_STA,
-    SIR_STOP_ROAM_OFFLOAD_SCAN,
-    SIR_PREPARE_REASSOC_REQ,
-};
-
-/**
- * enum sir_roam_cleanup_type - Type of cleanup needs to be performed.
- * @SIR_MBB_DISCONNECTED: Entire CSR cleanup for connected AP
- * needs to be performed
- * @SIR_MBB_CONNECTED: No need to perform CSR cleanup for connected AP.
- */
-enum sir_roam_cleanup_type {
-    SIR_MBB_DISCONNECTED,
-    SIR_MBB_CONNECTED,
-};
-#endif
 typedef void(*hdd_conAliveCb)(void *data, bool status);
 
 typedef struct {

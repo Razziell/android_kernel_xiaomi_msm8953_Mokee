@@ -824,9 +824,6 @@ typedef enum eSriLinkState {
 #ifdef WLAN_FEATURE_ROAM_OFFLOAD
     eSIR_LINK_FT_PREASSOC_STATE = 16,
 #endif
-#ifdef WLAN_FEATURE_LFR_MBB
-    eSIR_LINK_PRE_AUTH_REASSOC_STATE = 17,
-#endif
     eSIR_LINK_MAX = WLAN_HAL_MAX_ENUM_SIZE
 } tSirLinkState;
 
@@ -6884,7 +6881,6 @@ typedef enum {
     WIFI_CONFIG            = 61,
     ANTENNA_DIVERSITY_SELECTION  = 62,
     PER_BASED_ROAMING      = 63,
-    MAKE_BEFORE_BREAK      = 67,
     NUD_DEBUG              = 68,
     MAX_FEATURE_SUPPORTED  = 128,
 } placeHolderInCapBitmap;
