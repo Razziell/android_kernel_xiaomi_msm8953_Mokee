@@ -29,23 +29,6 @@
 #include <linux/of.h>
 #include <trace/events/power.h>
 
-static unsigned long arg_cpu_max_c1 = 2016000;
-
-static int __init cpufreq_read_cpu_max_c1(char *cpu_max_c1)
-{
-	unsigned long ui_khz;
-	int ret;
-
-	ret = kstrtoul(cpu_max_c1, 0, &ui_khz);
-	if (ret)
-		return -EINVAL;
-
-	arg_cpu_max_c1 = ui_khz;
-	printk("cpu_max_c1=%lu\n", arg_cpu_max_c1);
-	return ret;
-}
-__setup("cpu_max_c1=", cpufreq_read_cpu_max_c1);
-
 static DEFINE_MUTEX(l2bw_lock);
 
 static struct clk *cpu_clk[NR_CPUS];
