@@ -3680,7 +3680,8 @@ int mdss_mdp_igc_lut_config(struct msm_fb_data_type *mfd,
 	disp_num = config->block - MDP_LOGICAL_BLOCK_DISP_0;
 
 	if (config->ops & MDP_PP_OPS_READ) {
-		if (config->len != IGC_LUT_ENTRIES) {
+		if (config->len != IGC_LUT_ENTRIES &&
+		    !pp_ops[IGC].pp_get_config) {
 			pr_err("invalid len for IGC table for read %d\n",
 			       config->len);
 			return -EINVAL;
