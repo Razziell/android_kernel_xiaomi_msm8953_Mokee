@@ -212,7 +212,6 @@ struct cfg80211_event {
 			const u8 *ie;
 			size_t ie_len;
 			u16 reason;
-			bool locally_generated;
 		} dc;
 		struct {
 			u8 bssid[ETH_ALEN];

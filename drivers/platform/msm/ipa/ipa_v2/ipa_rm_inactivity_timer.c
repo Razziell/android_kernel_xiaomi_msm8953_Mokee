@@ -78,7 +78,7 @@ static void ipa_rm_inactivity_timer_func(struct work_struct *work)
 	if (ipa_rm_it_handles[me->resource_name].reschedule_work) {
 		IPADBG("%s: setting delayed work\n", __func__);
 		ipa_rm_it_handles[me->resource_name].reschedule_work = false;
-		queue_delayed_work(system_unbound_wq,
+		schedule_delayed_work(
 			&ipa_rm_it_handles[me->resource_name].work,
 			ipa_rm_it_handles[me->resource_name].jiffies);
 	} else if (ipa_rm_it_handles[me->resource_name].resource_requested) {
@@ -259,8 +259,7 @@ int ipa2_rm_inactivity_timer_release_resource(
 	ipa_rm_it_handles[resource_name].work_in_progress = true;
 	ipa_rm_it_handles[resource_name].reschedule_work = false;
 	IPADBG("%s: setting delayed work\n", __func__);
-	queue_delayed_work(system_unbound_wq,
-			      &ipa_rm_it_handles[resource_name].work,
+	schedule_delayed_work(&ipa_rm_it_handles[resource_name].work,
 			      ipa_rm_it_handles[resource_name].jiffies);
 	spin_unlock_irqrestore(&ipa_rm_it_handles[resource_name].lock, flags);
 

@@ -1119,8 +1119,7 @@ static const struct adreno_vbif_snapshot_registers *vbif_registers(
 	adreno_readreg(adreno_dev, ADRENO_REG_VBIF_VERSION, &version);
 
 	for (i = 0; i < count; i++) {
-		if ((list[i].version & list[i].mask) ==
-				(version & list[i].mask))
+		if (list[i].version == version)
 			return &list[i];
 	}
 
