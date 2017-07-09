@@ -21,8 +21,6 @@
 #include "msm_sd.h"
 #include "cam_soc_api.h"
 
-#define CSID_SOF_DEBUG_COUNT                      3
-
 enum csiphy_lane_assign {
 	PHY_LANE_D0,
 	PHY_LANE_CLK,
@@ -114,7 +112,6 @@ struct csid_device {
 	struct msm_camera_csid_params  current_csid_params;
 	uint32_t csid_sof_debug;
 	uint32_t csid_lane_cnt;
-	uint32_t csid_sof_debug_count;
 };
 
 #define VIDIOC_MSM_CSID_RELEASE \
