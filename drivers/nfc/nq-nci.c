@@ -70,7 +70,6 @@ struct nqx_dev {
 	/* read buffer*/
 	size_t kbuflen;
 	u8 *kbuf;
-
 };
 
 static int nfcc_reboot(struct notifier_block *notifier, unsigned long val,
