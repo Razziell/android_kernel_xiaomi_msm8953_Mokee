@@ -276,7 +276,6 @@ int apr_send_pkt(void *handle, uint32_t *buf)
 	uint16_t dest_id;
 	uint16_t client_id;
 	uint16_t w_len;
-	int rc;
 	unsigned long flags;
 
 	if (!handle || !buf) {
@@ -318,23 +317,14 @@ int apr_send_pkt(void *handle, uint32_t *buf)
 	APR_PKT_INFO("Tx: dest_svc[%d], opcode[0x%X], size[%d]",
 			hdr->dest_svc, hdr->opcode, hdr->pkt_size);
 
-	rc = apr_tal_write(clnt->handle, buf,
+	w_len = apr_tal_write(clnt->handle, buf,
 			(struct apr_pkt_priv *)&svc->pkt_owner,
 			hdr->pkt_size);
-	if (rc >= 0) {
-		w_len = rc;
-		if (w_len != hdr->pkt_size) {
-			pr_err("%s: Unable to write whole APR pkt successfully: %d\n",
-			       __func__, rc);
-			rc = -EINVAL;
-		}
-	} else {
-		pr_err("%s: Write APR pkt failed with error %d\n",
-			__func__, rc);
-	}
+	if (w_len != hdr->pkt_size)
+		pr_err("Unable to write APR pkt successfully: %d\n", w_len);
 	spin_unlock_irqrestore(&svc->w_lock, flags);
 
-	return rc;
+	return w_len;
 }
 
 int apr_pkt_config(void *handle, struct apr_pkt_cfg *cfg)
