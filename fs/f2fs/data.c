@@ -1203,6 +1203,12 @@ got_it:
 			goto next_page;
 		}
 
+static int get_data_block_fiemap(struct inode *inode, sector_t iblock,
+			struct buffer_head *bh_result, int create)
+{
+	return __get_data_block(inode, iblock, bh_result, create, true);
+}
+
 		/*
 		 * This page will go to BIO.  Do we need to send this
 		 * BIO off first?
